@@ -51,4 +51,20 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Copy current file path to clipboard
+vim.keymap.set('n', '<leader>cf', function()
+  vim.fn.setreg('+', vim.fn.expand '%')
+  print('Copied file path to clipboard: ' .. vim.fn.expand '%')
+end, { desc = 'Copy current relative [F]ile path to clipboard' })
+
+-- Get python import path for current file and copy to clipboard
+vim.keymap.set('n', '<leader>cp', function()
+  local filepath = vim.fn.expand '%'
+  local import_path = filepath
+    :gsub('%.py$', '') -- Remove .py extension
+    :gsub('^src/', '') -- Remove leading src/ if present
+    :gsub('/', '.') -- Replace / with .
+  vim.fn.setreg('+', import_path)
+  print('Copied python import path to clipboard: ' .. import_path)
+end, { desc = 'Copy current python [P]ackage path to clipboard' })
 -- vim: ts=2 sts=2 sw=2 et
