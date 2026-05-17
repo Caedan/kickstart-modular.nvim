@@ -87,6 +87,9 @@ return {
       vim.keymap.set('n', '<leader>sis', function()
         require('telescope.builtin').live_grep { additional_args = { '--glob', '!tests/*' } }
       end)
+      vim.keymap.set('n', '<leader>sit', function()
+        require('telescope.builtin').live_grep { additional_args = { '--glob', 'tests/**' } }
+      end)
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
